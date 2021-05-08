@@ -4,6 +4,8 @@ print("Вітаю в грі 'Угадай число' ")
 print("Перевіримо, хто за меншу кількість спроб, зможе відгадати загадане число\n\
 вашим противником")
 
+minimum = 0
+maximum = 100
 bot_retry = 0
 user_retry = 0
 save_number = []
@@ -12,18 +14,20 @@ user_number = int(input("Загадайте число боту від 0 до 10
 attempt = random.randint(0, 100)
 while user_number != attempt:
 
-    if not (attempt in save_number): #ця умова, щоб бот не повторював числа
+    if not (attempt in save_number): #ця умова, щоб бот не повторював числа, в останній редактурі не знаю чи цей блок коди взагалі потрібний
         save_number.append(attempt)
     else:
-        attempt = random.randint(0, 100)
+        attempt = random.randint(minimum, maximum)
         continue
 
     if attempt > user_number:
+        maximum = attempt
         bot_retry += 1
-        attempt = random.randint(0, attempt)
+        attempt = random.randint(minimum, maximum)
     elif attempt < user_number:
+        minimum = attempt
         bot_retry += 1
-        attempt = random.randint(attempt, 100)
+        attempt = random.randint(minimum, maximum)
 bot_attempt = attempt
 choice = "USER"
 
